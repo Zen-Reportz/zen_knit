@@ -1,0 +1,11 @@
+*.pyc
+**/__pycache__
+*.log
+*.out
+*.pdf
+*.tex
+*.html
+*.aux
+doc/example/*.txt
+**/figures
+.vscode/settings.json
