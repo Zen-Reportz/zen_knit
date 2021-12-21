@@ -3,9 +3,14 @@ name = "zen_knit"
 version = "0.1.0"
 description = "Zen-Knit is a formal (PDF), informal (HTML) report generator for data analyst and data scientist who wants to use python. Inspired from Pweave. "
 authors = ["Zen <zenreportz@protonmail.com>"]
-license= MIT 
-readme = README.rst
-repository = https://github.com/Zen-Reportz/zen_knit
+license = "MIT"
+readme = "README.rst"
+homepage = "https://github.com/Zen-Reportz/zen_knit"
+repository = "https://github.com/Zen-Reportz/zen_knit"
+include = [
+    "LICENSE",
+]
+
 
 [tool.poetry.dependencies]
 python = "^3.6"

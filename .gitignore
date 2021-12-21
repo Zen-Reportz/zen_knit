@@ -9,3 +9,5 @@
 doc/example/*.txt
 **/figures
 .vscode/settings.json
+dist/zen_knit-0.1.0-py3-none-any.whl
+dist/zen_knit-0.1.0.tar.gz
