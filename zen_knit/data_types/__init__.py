@@ -1,3 +1,5 @@
+
+import enum
 from pydantic import BaseModel, validator
 from typing import List, Optional, Tuple, Any
 
@@ -7,8 +9,8 @@ class GlobalOption(BaseModel):
     title: str
     author: Optional[str]
     date: Optional[str]
-    input_file_dir: str
-    input_file_name: str
+    input_file_dir: Optional[str]
+    input_file_name: Optional[str]
     matplot: bool = True
     kernal: str = "python3"
     log_level: str = "debug"
@@ -28,7 +30,6 @@ class GlobalOption(BaseModel):
 
 class ChunkOption(BaseModel):
     name: Optional[str]
-    output: str = "pdf"
     echo: bool = True
     render: bool = True
     run: bool = True
@@ -80,3 +81,11 @@ class OrganizedChunk(BaseModel):
 class OrganizedData(BaseModel):
     global_options: Optional[GlobalOption]
     chunks: List[OrganizedChunk]
+
+class OrganizedChuckType(enum.Enum):
+    Markdown = "markdown"
+    Code = "code"
+    Result = "se_data"
+    Error = "e_data"
+    Plot = "plot"
+            
