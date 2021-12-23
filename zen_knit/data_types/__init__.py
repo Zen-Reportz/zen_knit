@@ -86,6 +86,6 @@ class OrganizedChuckType(enum.Enum):
     Markdown = "markdown"
     Code = "code"
     Result = "se_data"
-    Error = "e_data"
+    Table = "e_data"
     Plot = "plot"
             
