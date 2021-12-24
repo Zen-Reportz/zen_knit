@@ -50,3 +50,11 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+How to Use it
+-------------
+
+  pip install zen-knit
+  knit -f doc/example/html_example.pyz  -ofd doc/example/output/
+  knit -f doc/example/pdf_example.pyz  -ofd doc/example/output/
