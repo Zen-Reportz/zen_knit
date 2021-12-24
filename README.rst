@@ -56,5 +56,7 @@ How to Use it
 -------------
 
   pip install zen-knit
+
   knit -f doc/example/html_example.pyz  -ofd doc/example/output/
+  
   knit -f doc/example/pdf_example.pyz  -ofd doc/example/output/
