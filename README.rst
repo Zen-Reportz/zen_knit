@@ -14,6 +14,7 @@ Features:
 * Capture matplotlib graphics.
 * Evaluate inline code in documentation chunks marked using ```{ }`` 
 * Publish reports from Python scripts. Similar to R markdown.
+* Interactive Plots using plotly
 * integrate it in your process. It will fit your need rather than you need to adjust for tool.
 
 Install
@@ -60,3 +61,5 @@ How to Use it
   knit -f doc/example/html_example.pyz  -ofd doc/example/output/
   
   knit -f doc/example/pdf_example.pyz  -ofd doc/example/output/
+
+  python doc/example/demo.py

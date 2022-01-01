@@ -56,6 +56,9 @@ class HTMLFormatter(BaseFormatter):
         t = highlight(t, IPyLexer(), HtmlFormatter())
 
         return t
+
+    def _format_html(self, content: OrganizedChunk):
+        return content.str_data
     
     def _format_image(self, content:OrganizedChunk):
         result = ""

@@ -32,6 +32,9 @@ class BaseFormatter:
     def _format_image(self, content:OrganizedChunk):
         pass
 
+    def _format_html(self, content:OrganizedChunk):
+        pass
+
     def _build_doc(self):
         pass 
     
@@ -52,6 +55,9 @@ class BaseFormatter:
                 self.formatted_doc = self.formatted_doc + "\n" + t
             elif chunk.type == "plot":
                 t = self._format_image(chunk)
+                self.formatted_doc = self.formatted_doc + "\n" + t
+            elif chunk.type == "html_data":
+                t = self._format_html(chunk)
                 self.formatted_doc = self.formatted_doc + "\n" + t
             else:
                 print("Not right format")

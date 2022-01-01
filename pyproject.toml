@@ -33,6 +33,8 @@ pytest = "^5.2"
 docutils = "^0.18.1"
 pandas = ">1.0.0"
 twine = "^3.7.1"
+plotly = "^5.5.0"
+bokeh = "^2.4.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

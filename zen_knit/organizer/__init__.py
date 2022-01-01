@@ -65,14 +65,11 @@ class BaseOrganizer:
         else:
             return False
     
-    
-        
     def _coder_string(self, data):
         list_ = ["stream", "error"]
         if data["output_type"] is None:
             return False
         
-
         if data["output_type"] in list_:
             if data["output_type"] == "stream":
                 if self._clean_up(data['text']) is not None:
@@ -91,7 +88,6 @@ class BaseOrganizer:
         if data["output_type"] is None:
             return False
 
-
         if data["output_type"] == "execute_result":
             if data.get("data") is not None:
                 if 'matplotlib' in data["data"]["text/plain"]:
@@ -103,11 +99,19 @@ class BaseOrganizer:
                     else:
                         temp = data["data"]["text/plain"]
                     
+                    if "<table" in temp:
+                        t = {"type": "html_data", "str_data":temp.encode().decode() }
+                        self.organized_data.chunks.append(OrganizedChunk(**t))
+                        return True
+                    # if "BokehJS" in temp:
+                    #     t = {"type": "html_data", "str_data": "<script type='text/javascript'>" + temp.encode().decode() + "</script>"  }
+                    #     self.organized_data.chunks.append(OrganizedChunk(**t))
+                        # return True
+
                     if self._clean_up(temp) is not None:
                         t = {"type": "e_data", "str_data":temp }
                         self.organized_data.chunks.append(OrganizedChunk(**t))
-                    
-                    return True
+                        return True
         
             return True           
 
@@ -135,6 +139,7 @@ class BaseOrganizer:
                 with open(fig_full_path, "wb") as f:
                     f.write(bfig)
                 i += 1
+        
         return figs
     
     def _build_file(self, extension, index, fig_caption= None, name =None):
@@ -150,6 +155,21 @@ class BaseOrganizer:
         fig_name = fig_name + "_" + str(index)
         fig_name = fig_name + "." + extension
         return  os.path.join(self.fig_folder, fig_name), os.path.join(self.fig_folder, fig_name)
+
+    def _interactive_plots(self, data):
+        
+        if data["output_type"] is None:
+            return False
+
+        if data["output_type"] == "display_data":
+            if "text/html" in data["data"]:    
+                if self.executed_data.global_options.output_format != "html":
+                    raise Exception("output format is not HTML")
+                else:        
+                    t = {"type": "html_data", "str_data":data["data"]["text/html"].encode().decode() }
+                    self.organized_data.chunks.append(OrganizedChunk(**t))
+                    return True
+        return False
 
     def _organize_doc(self):
         for chunk in self.executed_data.chunks:
@@ -168,6 +188,10 @@ class BaseOrganizer:
                 if present:
                     continue
 
+                present = self._interactive_plots(data)
+                if present:
+                    continue
+                
                 present = self._raw_plots(data, chunk_option)
                 if present:
                     continue

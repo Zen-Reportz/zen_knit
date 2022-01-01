@@ -111,9 +111,6 @@ class BaseExecutor(object):
             code = fig_size + "\n" + f_dpi
             self._run_code(code)
 
-
-   
-    
     def _send_to_kernal(self, code):
         msg_id = self.kc.execute(code, store_history=False)
         while True:
