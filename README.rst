@@ -2,7 +2,7 @@ About Zen-Knit:
 ---------------
 
 Zen-Knit is a formal (PDF), informal (HTML) report generator for data analyst and data scientist who wants to use python. Inspired from Pweave. 
-Zen-Knit is good for creating reports, tutorials with embedded python
+Zen-Knit is good for creating reports, tutorials with embedded python. RMarkdown alternative.
 
 Features:
 ---------
