@@ -7,7 +7,7 @@ Zen-Knit is good for creating reports, tutorials with embedded python
 Features:
 ---------
 
-* Python 3.6+ compatibility
+* Python 3.7+ compatibility
 * Support for IPython magics and rich output.
 * **Execute python code** in the chunks and **capture** input and output to a report.
 * **Use hidden code chunks,** i.e. code is executed, but not printed in the output file.
@@ -16,7 +16,7 @@ Features:
 * Publish reports from Python scripts. Similar to R markdown.
 * Interactive Plots using plotly
 * integrate it in your process. It will fit your need rather than you need to adjust for tool.
-* Supported HTTP request or file for CSS
+* custom CSS support (HTTP(s) and local file)
 
 Install
 -----------------------
