@@ -1,5 +1,5 @@
 import base64
-
+import requests
 from zen_knit.formattor import html_support
 try:
     import markdown
@@ -15,16 +15,43 @@ from zen_knit.formattor.base_formatter import BaseFormatter
 from zen_knit.formattor.makrdown_math import MathExtension
 from zen_knit.formattor.html_support import htmltemplate, themes
 from zen_knit import __version__
+import os
 
 class HTMLFormatter(BaseFormatter):
     def __init__(self, organized_data:OrganizedData):
         super().__init__(organized_data)
 
-    def _get_css(self):
-        theme_css = themes.get(self.organized_data.global_options.css)
-        if theme_css is None:
-            raise Exception(f"Not right css, currently we are supporting {themes.keys()} ")
+    @staticmethod
+    def _make_css_request(url):
+        r = requests.get(url)
+        if r.status_code != 200:
+            raise Exception(f"CSS URL dont found, status code is {r.status_code}")
+        if 200 < r.status_code < 300:
+            print(f"css get request return status code {r.status_code}")
+
+        return r.text
+
+    @staticmethod
+    def _get_default_theme(css):
+        theme_css = themes.get(css)
         return theme_css
+        
+    def _get_css(self):
+        css = self.organized_data.global_options.css
+        if 'http' in css:
+            return self._make_css_request(css)
+        
+        results = self._get_default_theme(css)
+        
+        if results is None:
+            file = os.path.abspath(css)
+            with open(file, "r") as f:
+                results = f.read()
+
+        if results is None:
+            raise Exception(f"No CSS found in default themes and file, , currently we are supporting {themes.keys()} ")
+            
+        return results
     
     def _add_header_fotter(self):
         theme_css = self._get_css()
@@ -58,7 +85,10 @@ class HTMLFormatter(BaseFormatter):
         return t
 
     def _format_html(self, content: OrganizedChunk):
-        return content.str_data
+        if '<table' in content.str_data:
+            return "\n".join(content.str_data.split("\\n"))
+        else:
+            return content.str_data
     
     def _format_image(self, content:OrganizedChunk):
         result = ""

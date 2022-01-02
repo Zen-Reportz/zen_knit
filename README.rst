@@ -16,6 +16,7 @@ Features:
 * Publish reports from Python scripts. Similar to R markdown.
 * Interactive Plots using plotly
 * integrate it in your process. It will fit your need rather than you need to adjust for tool.
+* Supported HTTP request or file for CSS
 
 Install
 -----------------------

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "zen_knit"
-version = "0.1.5"
+version = "0.1.6"
 description = "Zen-Knit is a formal (PDF), informal (HTML) report generator for data analyst and data scientist who wants to use python. Inspired from Pweave. "
 authors = ["Zen <zenreportz@protonmail.com>"]
 license = "MIT"

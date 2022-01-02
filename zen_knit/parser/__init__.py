@@ -51,7 +51,13 @@ class BaseParser:
                 if "output" == split_t[0]:
                     self.raw_data.global_options.__setattr__("output_format", split_t[1])
             else:
-                raise Exception("Not right information in title place")
+                if split_t[0] in ('title', 'author', 'date', 'output'):
+                    raise Exception(f"Not right format for {split[1]}")
+                
+            if 'css' in split_t[0]:
+                css = ":".join(split_t[1:])
+                self.raw_data.global_options.__setattr__("css", css)
+
         
         if (not title_present) and (self.raw_data.global_options.title == "test"):
             raise Exception("Title is not provided")
