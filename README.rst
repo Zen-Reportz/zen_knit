@@ -12,11 +12,48 @@ Features:
 * **Execute python code** in the chunks and **capture** input and output to a report.
 * **Use hidden code chunks,** i.e. code is executed, but not printed in the output file.
 * Capture matplotlib graphics.
-* Evaluate inline code in documentation chunks marked using ```{ }`` 
+* Evaluate inline code in documentation chunks marked using ```{ }``` 
 * Publish reports from Python scripts. Similar to R markdown.
 * Interactive Plots using plotly
 * integrate it in your process. It will fit your need rather than you need to adjust for tool.
 * custom CSS support (HTTP(s) and local file)
+
+Examples:
+---------
+
+===========
+PDF example
+===========
+
+.. figure:: ./doc/example/screenshots/pdf_code.png
+  :width: 500px
+
+
+.. figure:: ./doc/example/screenshots/pdf_output.png
+  :width: 500px
+
+
+============
+HTML example
+============
+.. figure:: ./doc/example/screenshots/html_code.png
+  :width: 500px
+
+.. figure:: ./doc/example/screenshots/html_output.png
+  :width: 500px
+
+.. figure:: ./doc/example/screenshots/html_output_2.png
+  :width: 500px
+
+============================
+HTML example with custom CSS
+============================
+.. figure:: ./doc/example/screenshots/html_cdn_css_code.png
+  :width: 500px
+
+.. figure:: ./doc/example/screenshots/html_custom_css_code.png
+  :width: 500px
+
 
 Install
 -----------------------
