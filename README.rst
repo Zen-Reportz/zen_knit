@@ -17,7 +17,8 @@ Features:
 * Interactive Plots using plotly
 * integrate it in your process. It will fit your need rather than you need to adjust for tool.
 * custom CSS support (HTTP(s) and local file)
-
+* direct sql support 
+  
 Examples:
 ---------
 
@@ -32,6 +33,17 @@ PDF example
 .. figure:: ./doc/example/screenshots/pdf_output.png
   :width: 500px
 
+
+====================
+PDF example with SQL
+====================
+
+.. figure:: ./doc/example/screenshots/pdf_sql_code.png
+  :width: 500px
+
+
+.. figure:: ./doc/example/screenshots/pdf_sql_output.png
+  :width: 500px
 
 ============
 HTML example
@@ -53,6 +65,18 @@ HTML example with custom CSS
 
 .. figure:: ./doc/example/screenshots/html_custom_css_code.png
   :width: 500px
+
+=====================
+HTML example with SQL
+=====================
+
+.. figure:: ./doc/example/screenshots/html_sql_code.png
+  :width: 500px
+
+
+.. figure:: ./doc/example/screenshots/html_sql_output.png
+  :width: 500px
+
 
 
 Install

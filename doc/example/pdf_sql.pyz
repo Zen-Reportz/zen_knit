@@ -1,0 +1,19 @@
+---
+title: Zen Markdown Demo
+author: Dr. P. B. Patel
+date: CURRENT_DATE
+output: pdf
+---
+
+# with sql
+```{sql}
+SELECT * 
+FROM stocks
+```
+
+
+# with custom con string
+```{sql, con_string=my_con_string}
+SELECT * 
+FROM stocks
+```

@@ -6,6 +6,15 @@ from queue import Empty
 from nbformat.v4 import output_from_msg
 import re
 
+
+database_query = """
+from sqlalchemy import create_engine 
+import pandas as pd 
+engine = create_engine('{my_connection}')
+with engine.begin() as con:
+    {var_name} = pd.read_sql('{query}', con )
+{var_name}.{result_in} """
+
 class BaseExecutor(object):
     
     def __init__(self, data: ParseData):
@@ -49,6 +58,42 @@ class BaseExecutor(object):
     def _run_chucks(self):
         for chunk in self.data.chunks:
             self._run_chunck(chunk)
+
+    def _run_and_save(self, code:str,  ec:ExecuatedChunk, type_:str):
+        ran_code = self._run_code(code)
+        if ran_code is not None:
+            for r in ran_code:
+                eco = ExecuatedChucnkOut(
+                    output_type=type_,
+                    data= r
+                )
+                ec.results.append(eco)
+
+    def _run_sql(self, chunk:Chunk, ec:ExecuatedChunk):
+        query = chunk.string_.replace("\n", " ")
+        con_string =  chunk.options.con_string
+        my_connection = os.getenv(con_string)
+        
+        var_name = chunk.options.name or "zen"
+        if self.data.global_options.output_format == "pdf":
+            result_in = "to_latex()"
+        else:
+            result_in = "to_html()"
+        code = database_query.format(my_connection=my_connection, query=query, var_name=var_name, result_in=result_in)
+        self._run_and_save(code, ec, "code")
+
+    def _run_code_chunk(self, chunk:Chunk, ec:ExecuatedChunk):
+        code = ""
+        for partial_string in chunk.string_.splitlines():
+            if self.new_line_regex.search(partial_string, 1):
+                if code != "":
+                    self._run_and_save(code, ec, chunk.type)
+                    code = ""
+                code = partial_string
+            else:
+                code = code + "\n" + partial_string
+        
+        self._run_and_save(code, ec, chunk.type)
     
     def _run_chunck(self, chunk:Chunk):
         self._pre_run(chunk)
@@ -60,36 +105,15 @@ class BaseExecutor(object):
                 data= {'code_text_raw': chunk.string_}
             )
             ec.results.append(eco)
-        
+
+        if (chunk.options.run) & (chunk.type == "sql"):
+            self._run_sql(chunk, ec)
+
         if (chunk.options.run) & (chunk.type == "code"):
-            code = ""
-            for partial_string in chunk.string_.splitlines():
-                if self.new_line_regex.search(partial_string, 1):
-                    if code != "":
-                        ran_code = self._run_code(code)
-                        code = ""
-                        if ran_code is not None:
-                            for r in ran_code:
-                                eco = ExecuatedChucnkOut(
-                                    output_type=chunk.type,
-                                    data= r
-                                )
-                                ec.results.append(eco)
-                    code = partial_string
-                else:
-                    code = code + "\n" + partial_string
-            
-            ran_code = self._run_code(code) 
-            code = ""
-            if ran_code is not None:
-                for r in ran_code:
-                    eco = ExecuatedChucnkOut(
-                        output_type=chunk.type,
-                        data= r
-                    )
-                    ec.results.append(eco)
+            self._run_code_chunk(chunk, ec)
         
         self.excuted_data.chunks.append(ec)    
+        
     def _run_code(self, code):
         msg_id = self._send_to_kernal(code)
         return self._pull_data_from_kernal(msg_id)

@@ -6,8 +6,10 @@
 *.tex
 *.html
 *.aux
+*.fls
+*.fdb_latexmk
+*.synctex.gz
 doc/example/*.txt
 **/figures
 .vscode/settings.json
 dist/*
-

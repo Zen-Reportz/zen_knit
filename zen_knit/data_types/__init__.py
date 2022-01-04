@@ -40,6 +40,7 @@ class ChunkOption(BaseModel):
     fig_position: Optional[str] = "htpb"
     fig_env: Optional[str]
     fig_width: Optional[str]
+    con_string: Optional[str] = "zen_con"
 
 BOOLENCHUNCKOPTIONS = ['run', 'echo','render', 'fig']
 

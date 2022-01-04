@@ -83,7 +83,10 @@ class BaseParser:
                                                  options= option))
                     temp_string = ''
                     started = True
-                    type_ = 'code'
+                    if ('{sql' in raw.lower()):
+                        type_ = 'sql'
+                    else:
+                        type_ = 'code'  
                     option = option_parser(raw)
 
             else:
