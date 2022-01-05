@@ -65,7 +65,7 @@ contents.append(OrganizedChunk(type=t.Code.value, str_data=my_string))
 xpoints = np.array([1, 8])
 ypoints = np.array([3, 10])
 plt.plot(xpoints, ypoints, 'o')
-file_name = "figures/books_read.png"
+file_name = "output/figures/books_read.png"
 plt.savefig(file_name)
 chunk_option = ChunkOption(
     render = True,
