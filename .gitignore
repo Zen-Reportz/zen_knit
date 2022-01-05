@@ -2,14 +2,13 @@
 **/__pycache__
 *.log
 *.out
-*.pdf
 *.tex
-*.html
 *.aux
 *.fls
 *.fdb_latexmk
 *.synctex.gz
 doc/example/*.txt
+doc/example/output
 **/figures
 .vscode/settings.json
 dist/*
