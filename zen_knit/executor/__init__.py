@@ -5,7 +5,7 @@ from jupyter_client import KernelManager, BlockingKernelClient
 from queue import Empty
 from nbformat.v4 import output_from_msg
 import re
-
+import joblib
 
 database_query = """
 from sqlalchemy import create_engine 
@@ -21,13 +21,30 @@ class BaseExecutor(object):
         self.new_line_regex = re.compile("^\S*")
         self.data = data
         self.excuted_data = ExecutedData(global_options=data.global_options, chunks=[])
+        self.cached_data = None
+        self.load_cache()
         self._set_up_kernal()
         if self.data.global_options.matplot:
             self._preload_matplot()
         self._run_chucks()
         self._close_kernal()
+
+    def _save_chunks(self):
+        data = self.excuted_data
+        file_name = self.data.global_options.input_file_name.split(".")[0]
+        cache_file = self.data.global_options.output_file_dir +"/" +file_name + "._cache_data.jolib"
+        joblib.dump(data, cache_file)
+
         
-    
+    def load_cache(self):
+        if self.data.global_options.cache:
+            file_name = self.data.global_options.input_file_name.split(".")[0]
+            cache_file = self.data.global_options.output_file_dir +"/" + file_name + "._cache_data.jolib"
+            try:
+                self.cached_data = joblib.load(cache_file)
+            except:
+                pass
+
     def _set_up_kernal(self):
         global_options = self.data.global_options
         self.km = InProcessKernelManager(kernel_name=global_options.kernal)
@@ -54,10 +71,15 @@ class BaseExecutor(object):
         self.kc.stop_channels()
         self.km.shutdown_kernel()
 
-
+  
     def _run_chucks(self):
-        for chunk in self.data.chunks:
-            self._run_chunck(chunk)
+        for index, chunk in enumerate(self.data.chunks):
+            if chunk.options.name:
+                print(f"executing {chunk.options.name}")
+            else:
+                print(f"executing index {index}")
+            self._run_chunck(chunk, index)
+        self._save_chunks()
 
     def _run_and_save(self, code:str,  ec:ExecuatedChunk, type_:str):
         ran_code = self._run_code(code)
@@ -95,7 +117,17 @@ class BaseExecutor(object):
         
         self._run_and_save(code, ec, chunk.type)
     
-    def _run_chunck(self, chunk:Chunk):
+    def _run_chunck(self, chunk:Chunk, index):
+        if (self.data.global_options.cache) and (self.cached_data):
+            if chunk.type == "code":
+                if chunk.options.name:
+                    print(f"cache {chunk.options.name}")
+                else:
+                    print(f"cache index {index}")
+                    ec = self.cached_data.chunks[index]
+                    self.excuted_data.chunks.append(ec)    
+                    return
+                
         self._pre_run(chunk)
         ec = ExecuatedChunk(chunk=chunk, results=[])
 

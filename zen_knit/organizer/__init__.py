@@ -172,8 +172,12 @@ class BaseOrganizer:
         return False
 
     def _organize_doc(self):
-        for chunk in self.executed_data.chunks:
+        for index, chunk in enumerate(self.executed_data.chunks):
             chunk_option = chunk.chunk.options
+            if chunk_option.name:
+                print(f"organizing {chunk_option.name}")
+            else:
+                print(f"organizing index {index}")
             results = chunk.results
             for result in results:
                 data = result.data

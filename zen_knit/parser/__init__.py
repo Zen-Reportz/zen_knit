@@ -58,7 +58,11 @@ class BaseParser:
                 css = ":".join(split_t[1:])
                 self.raw_data.global_options.__setattr__("css", css)
 
-        
+            if 'cache' in split_t[0]:
+                value = split_t[1]
+                value = (value == "true") or (value == "True") or (value == "t") or (value == "T")
+                self.raw_data.global_options.__setattr__("cache", value)
+
         if (not title_present) and (self.raw_data.global_options.title == "test"):
             raise Exception("Title is not provided")
 

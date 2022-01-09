@@ -18,6 +18,8 @@ Features:
 * integrate it in your process. It will fit your need rather than you need to adjust for tool.
 * custom CSS support (HTTP(s) and local file)
 * direct sql support 
+* chaching executed code for faster report devlopement 
+* printing index of chunk or chunk name in console
   
 Examples:
 ---------

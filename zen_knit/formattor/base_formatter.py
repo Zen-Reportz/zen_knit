@@ -40,7 +40,8 @@ class BaseFormatter:
     
     def _format_doc(self):
         chunk: OrganizedChunk
-        for chunk in self.organized_data.chunks:
+        for _, chunk in enumerate(self.organized_data.chunks):
+            
             if chunk.type == "markdown":
                 t = self._format_docchunk(chunk)
                 self.formatted_doc = self.formatted_doc + "\n" + t

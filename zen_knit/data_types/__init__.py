@@ -19,6 +19,7 @@ class GlobalOption(BaseModel):
     output_format: Optional[str]
     output_file_name: Optional[str]
     output_file_dir: Optional[str]
+    cache: Optional[bool] = False
     
     @validator('log_level')
     def fix_option_for_log(cls, v:str):

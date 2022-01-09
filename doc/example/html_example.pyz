@@ -4,11 +4,12 @@ author: Dr. P. B. Patel
 date: CURRENT_DATE
 css: skleton
 output: html
+cache: true
 ---
 
 
 # with class 
-```{run=true, echo=true}
+```{run=true, echo=true, name=class}
 class test:
     def __init__(self):
         print("hi")
@@ -20,7 +21,7 @@ t.test()
 ```
 
 
-```{run=true, echo=true, render=false}
+```{run=true, echo=true, render=false, name=import}
 import numpy as np
 import matplotlib.pyplot as plt
 ```
