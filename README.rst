@@ -1,3 +1,6 @@
+image:: https://static.pepy.tech/personalized-badge/zen-knit?period=total&units=international_system&left_color=grey&right_color=green&left_text=Downloads
+ :target: https://pepy.tech/project/zen-knit
+
 About Zen-Knit:
 ---------------
 
