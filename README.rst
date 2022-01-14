@@ -1,15 +1,15 @@
-About Zen-Knit:
----------------
-
-Zen-Knit is a formal (PDF), informal (HTML) report generator for data analyst and data scientist who wants to use python. RMarkdown alternative.
-Zen-Knit is good for creating reports, tutorials with embedded python. RMarkdown alternative. Python Markdown Support.
-
 .. image:: https://static.pepy.tech/personalized-badge/zen-knit?period=total&units=international_system&left_color=grey&right_color=green&left_text=Downloads
  :target: https://pepy.tech/project/zen-knit
 .. image:: https://img.shields.io/pypi/pyversions/zen-knit.svg?color=green
 .. image:: https://img.shields.io/github/license/Zen-Reportz/zen_knit?color=green
 .. image:: https://img.shields.io/pypi/v/zen-knit?color=green&label=pypi%20package
 
+
+About Zen-Knit:
+---------------
+
+Zen-Knit is a formal (PDF), informal (HTML) report generator for data analyst and data scientist who wants to use python. RMarkdown alternative.
+Zen-Knit is good for creating reports, tutorials with embedded python. RMarkdown alternative. Python Markdown Support.
 
 
 Features:
