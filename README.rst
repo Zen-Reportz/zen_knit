@@ -32,6 +32,12 @@ Features:
 Examples:
 ---------
 
+All example are available HERE_
+
+.. _HERE: https://github.com/Zen-Reportz/zen_knit/tree/main/doc/example
+
+__ HERE_
+
 ===========
 PDF example
 ===========
