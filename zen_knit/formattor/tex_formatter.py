@@ -13,18 +13,25 @@ from zen_knit.formattor.base_formatter import BaseFormatter
 class TexFormatter(BaseFormatter):
     def __init__(self, organized_data:OrganizedData):
         super().__init__(organized_data)
+        my_library = ["\\usepackage{fancyvrb, color, graphicx, amsmath, url, textcomp, iftex}", 
+                      "\\usepackage{palatino}"
+                      "\\usepackage[a4paper,text={16.5cm,25.2cm},centering]{geometry}",
+                      "\\ifxetex\\usepackage{fontspec}\\fi",
+                      "\\usepackage{xcolor}",
+                      "\\usepackage{hyperref}"]
+
+        lh = organized_data.global_options.latex_header
+        if type(lh)==str:
+            latex_header = [lh]
+        else:
+            latex_header = lh
+
+        my_library.extend(latex_header)
+        my_library = " \n ".join(my_library)
+
         self.header = ("""\\documentclass[a4paper,11pt,final]{article}
-            \\usepackage{fancyvrb, color, graphicx, hyperref, amsmath, url, textcomp, booktabs}
-            \\usepackage{palatino}
-            \\usepackage[a4paper,text={16.5cm,25.2cm},centering]{geometry}
-
-            %%Set different options for xetex and luatex
-            \\usepackage{iftex}
-            \\ifxetex\\usepackage{fontspec}\\fi
-
-            \\ifluatex\\usepackage{fontspec}\\fi
-
-            \\usepackage{xcolor}
+            %s
+            
             %% ANSI colors from nbconvert
             \\definecolor{ansi-black}{HTML}{3E424D}
             \\definecolor{ansi-black-intense}{HTML}{282C36}
@@ -44,22 +51,25 @@ class TexFormatter(BaseFormatter):
             \\definecolor{ansi-white-intense}{HTML}{A1A6B2}
 
             \\hypersetup
-            {   pdfauthor = {Pweave},
+            {   pdfauthor = {zen},
                 pdftitle={Published from %s},
                 colorlinks=TRUE,
                 linkcolor=black,
                 citecolor=blue,
                 urlcolor=blue
+                pdfpagemode=FullScreen,
             }
+            
             \\setlength{\parindent}{0pt}
             \\setlength{\parskip}{1.2ex}
             %% fix for pandoc 1.14
             \\providecommand{\\tightlist}{%%
                 \\setlength{\\itemsep}{0pt}\\setlength{\\parskip}{0pt}}
             %s
-            """) % (self.organized_data.global_options.input_file_name, LatexFormatter().get_style_defs())
+            """) % (my_library, self.organized_data.global_options.input_file_name, LatexFormatter().get_style_defs())
+        
         self.formatted_doc = ''
-        self.footer = r"\end{document}"
+        self.footer = "\\end{document}"
         self.subheader = "\n\\begin{document}\n"
 
 

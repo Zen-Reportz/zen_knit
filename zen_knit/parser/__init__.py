@@ -50,6 +50,8 @@ class BaseParser:
                     self.raw_data.global_options.__setattr__("date", date1)
                 if "output" == split_t[0]:
                     self.raw_data.global_options.__setattr__("output_format", split_t[1])
+                if "latex_header" == split_t[0]:
+                    self.raw_data.global_options.__setattr__("latex_header", split_t[1])
             else:
                 if split_t[0] in ('title', 'author', 'date', 'output'):
                     raise Exception(f"Not right format for {split[1]}")
