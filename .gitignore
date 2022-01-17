@@ -12,3 +12,4 @@ doc/example/output
 **/figures
 .vscode/settings.json
 dist/*
+plugins/vscode-zen-knit/node_modules/*
