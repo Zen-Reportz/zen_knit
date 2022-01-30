@@ -67,6 +67,7 @@ class BaseFormatter:
         fd = self.organized_data.global_options.output_file_dir
         fn = self.organized_data.global_options.output_file_name
         file_  = f"{fd}/{fn}"
+        print(f"writing file {file_}")
         with io.open(file_, 'wt', encoding='utf-8') as f:
             f.write(self.formatted_doc)
         

@@ -12,6 +12,11 @@ Zen-Knit is a formal (PDF), informal (HTML) report generator for data analyst an
 Zen-Knit is good for creating reports, tutorials with embedded python. RMarkdown alternative. Python Markdown Support.
 
 
+VS Code Plugin:
+---------------
+Location: https://marketplace.visualstudio.com/items?itemName=ZenReportz.vscode-zen-knit
+
+
 Features:
 ---------
 

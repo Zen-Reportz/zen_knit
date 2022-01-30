@@ -7,7 +7,6 @@ output: html
 cache: true
 ---
 
-
 # with class 
 ```{run=true, echo=true, name=class}
 class test:
@@ -20,14 +19,12 @@ t = test()
 t.test()
 ```
 
-
 ```{run=true, echo=true, render=false, name=import}
 import numpy as np
 import matplotlib.pyplot as plt
 ```
 
 # Lax example
-
 $$ \begin{pmatrix}
 x^2 + y^2 &= 1 \\
 y &= \sqrt{1 - x^2}
