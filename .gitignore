@@ -13,3 +13,5 @@ doc/example/output
 .vscode/settings.json
 dist/*
 plugins/vscode-zen-knit/node_modules/*
+plugins/vscode-zen-knit/dist/*
+*.vsix

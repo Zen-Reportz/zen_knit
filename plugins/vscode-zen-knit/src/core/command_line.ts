@@ -32,3 +32,10 @@ export function getCommand(cmd: string): Promise<string> {
         }
     });
 }
+
+
+export function getOutput(cmd: string): string {
+    const configuration = vscode.workspace.getConfiguration('zen-knit');
+    const command = <string>configuration.get(cmd + 'Path');
+    return command
+}

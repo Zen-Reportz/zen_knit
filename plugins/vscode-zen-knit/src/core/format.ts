@@ -5,7 +5,6 @@ import cp = require('child_process');
 const fullRange = (doc: vscode.TextDocument) => doc.validateRange(new vscode.Range(0, 0, Number.MAX_VALUE, Number.MAX_VALUE));
 
 export function formatDoc(myChannel: vscode.OutputChannel){
-    console.log("hi")
     return vscode.languages.registerDocumentFormattingEditProvider('zen-knit-format', {
         async provideDocumentFormattingEdits(document: vscode.TextDocument): Promise<vscode.TextEdit[]> {
             console.log("hi inside");

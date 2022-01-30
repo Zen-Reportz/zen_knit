@@ -1,12 +1,13 @@
 {
   "name": "vscode-zen-knit",
+  "publisher": "ZenReportz",
   "repository": {
     "type": "git",
     "url": "https://github.com/Zen-Reportz/zen_knit/pulgins/vscode-zen-knit"
   },
   "displayName": "vscode-zen-knit",
   "description": "Zen-Knit is a formal (PDF), informal (HTML) report generator for data analyst and data scientist who wants to use python. RMarkdown alternative. Zen-Knit is good for creating reports, tutorials with embedded python. RMarkdown alternative. Python Markdown Support. ",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.63.0"
   },
@@ -35,8 +36,13 @@
         "properties": {
           "zen-knit.knitPath": {
 						"type": "string",
-						"default": "/home/aarya/.cache/pypoetry/virtualenvs/zen-knit-cH2izjWV-py3.8/bin/knit",
+						"default": "/home/drpbpatel/Documents/git/zen/zen_knit/.venv/bin/knit",
 						"description": "zen-knit path"
+					},
+          "zen-knit.outputPath": {
+						"type": "string",
+						"default": "/home/drpbpatel/Documents/git/zen/zen_knit/doc/example/output",
+						"description": "zen-knit output folder"
 					}
         }
       }

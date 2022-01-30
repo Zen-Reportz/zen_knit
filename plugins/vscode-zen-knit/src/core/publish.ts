@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
 import path = require('path');
-import { getCommand } from './command_line';
+import { getCommand, getOutput } from './command_line';
 import cp = require('child_process');
+import * as fs from 'fs';
 
 export function knit(myChannel: vscode.OutputChannel){
 
@@ -10,10 +11,15 @@ export function knit(myChannel: vscode.OutputChannel){
         if (vscode.window.activeTextEditor) {
             const currentDocument = vscode.window.activeTextEditor.document;
             const knit = await getCommand('knit');
+            var output = getOutput('f');
+            let { dir: parentDir } = path.parse(currentDocument.uri.path);
+            if (output === undefined){
+                output = parentDir.toString()
+            }
             const d = new Date();
 
             myChannel.appendLine("processing: "+ currentDocument.uri.fsPath + " at: " + d.toISOString());
-            cp.exec(knit + ' -f' + currentDocument.uri.fsPath, (error, stdout, stderr) => {
+            cp.exec(knit + ' -f ' + currentDocument.uri.fsPath + " -ofd " +  output, (error, stdout, stderr) => {
                 myChannel.appendLine(stdout);
                 myChannel.appendLine(stderr);
                 if (error) {
