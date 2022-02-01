@@ -4,24 +4,35 @@ from pydantic import BaseModel, validator
 from typing import List, Optional, Tuple, Any
 
 
+class Input(BaseModel):
+    dir: Optional[str]
+    file_name: Optional[str]
+    matplot: bool = True
+
+class latexOuput(BaseModel):
+    header: Optional[str] 
+class htmlOutput(BaseModel):
+    css: str = "bootstrap"
+
+class Output(BaseModel):
+    fig_dir: str = "figures"
+    format: Optional[str]
+    file_name: Optional[str]
+    dir: Optional[str]
+    latex: Optional[latexOuput]
+    html: Optional[htmlOutput]
+
 
 class GlobalOption(BaseModel):
     title: str
     author: Optional[str]
     date: Optional[str]
-    input_file_dir: Optional[str]
-    input_file_name: Optional[str]
-    matplot: bool = True
     kernal: str = "python3"
     log_level: str = "debug"
-    fig_dir: str = "figures"
-    css: str = "bootstrap"
-    output_format: Optional[str]
-    output_file_name: Optional[str]
-    output_file_dir: Optional[str]
     cache: Optional[bool] = False
-    latex_header: List[str] = []
-    
+    output: Output
+    input: Input
+
     @validator('log_level')
     def fix_option_for_log(cls, v:str):
         if v.lower() not in ('notset', "debug", 'info', 'warning', 'error', 'critical'):

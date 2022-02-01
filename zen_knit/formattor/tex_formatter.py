@@ -13,21 +13,22 @@ from zen_knit.formattor.base_formatter import BaseFormatter
 class TexFormatter(BaseFormatter):
     def __init__(self, organized_data:OrganizedData):
         super().__init__(organized_data)
-        my_library = ["\\usepackage{fancyvrb, color, graphicx, amsmath, url, textcomp, iftex}", 
+        my_library = ["\\usepackage{fancyvrb, color, graphicx, amsmath, url, textcomp, iftex, booktabs}", 
                       "\\usepackage{palatino}"
                       "\\usepackage[a4paper,text={16.5cm,25.2cm},centering]{geometry}",
                       "\\ifxetex\\usepackage{fontspec}\\fi",
                       "\\usepackage{xcolor}",
                       "\\usepackage{hyperref}"]
-
-        lh = organized_data.global_options.latex_header
-        if type(lh)==str:
-            latex_header = [lh]
-        else:
-            latex_header = lh
-
-        my_library.extend(latex_header)
+        try:
+            lh = organized_data.global_options.output.latex.header
+            if lh:
+                latex_header = [lh]
+                my_library.extend(latex_header)
+        except:
+            pass
+    
         my_library = " \n ".join(my_library)
+
 
         self.header = ("""\\documentclass[a4paper,11pt,final]{article}
             %s
@@ -66,7 +67,7 @@ class TexFormatter(BaseFormatter):
             \\providecommand{\\tightlist}{%%
                 \\setlength{\\itemsep}{0pt}\\setlength{\\parskip}{0pt}}
             %s
-            """) % (my_library, self.organized_data.global_options.input_file_name, LatexFormatter().get_style_defs())
+            """) % (my_library, self.organized_data.global_options.input.file_name, LatexFormatter().get_style_defs())
         
         self.formatted_doc = ''
         self.footer = "\\end{document}"
@@ -149,8 +150,8 @@ class TexFormatter(BaseFormatter):
         self.formatted_doc =  self.header  + self.subheader  + self.formatted_doc + self.footer
 
     def write_file(self):
-        fd = self.organized_data.global_options.output_file_dir
-        fn = self.organized_data.global_options.output_file_name.split(".")[0] + ".tex"
+        fd = self.organized_data.global_options.output.dir
+        fn = self.organized_data.global_options.output.file_name.split(".")[0] + ".tex"
         file_  = f"{fd}/{fn}"
         with io.open(file_, 'wt', encoding='utf-8') as f:
             f.write(self.formatted_doc)
@@ -161,7 +162,7 @@ class TexFormatter(BaseFormatter):
         try:
             # pandoc2latex
             # pdflatex
-            latex = Popen(["pdflatex", "-output-directory", self.organized_data.global_options.output_file_dir, file_], stdin=PIPE, stdout=PIPE)
+            latex = Popen(["pdflatex", "-output-directory", self.organized_data.global_options.output.dir, file_], stdin=PIPE, stdout=PIPE)
             print("Running  pdflatex ...")
         except Exception as e:
             print(e)

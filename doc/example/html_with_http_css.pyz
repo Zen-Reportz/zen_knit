@@ -2,8 +2,10 @@
 title: Zen Markdown Demo
 author: Dr. P. B. Patel
 date: CURRENT_DATE
-css: https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css
-output: html
+output: 
+    format: html
+    html: 
+        css: https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css
 ---
 
 

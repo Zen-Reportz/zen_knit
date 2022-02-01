@@ -64,8 +64,8 @@ class BaseFormatter:
                 print("Not right format")
 
     def write_file(self):
-        fd = self.organized_data.global_options.output_file_dir
-        fn = self.organized_data.global_options.output_file_name
+        fd = self.organized_data.global_options.output.dir
+        fn = self.organized_data.global_options.output.file_name
         file_  = f"{fd}/{fn}"
         print(f"writing file {file_}")
         with io.open(file_, 'wt', encoding='utf-8') as f:

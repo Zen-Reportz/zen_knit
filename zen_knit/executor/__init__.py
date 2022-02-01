@@ -24,22 +24,22 @@ class BaseExecutor(object):
         self.cached_data = None
         self.load_cache()
         self._set_up_kernal()
-        if self.data.global_options.matplot:
+        if self.data.global_options.input.matplot:
             self._preload_matplot()
         self._run_chucks()
         self._close_kernal()
 
     def _save_chunks(self):
         data = self.excuted_data
-        file_name = self.data.global_options.input_file_name.split(".")[0]
-        cache_file = self.data.global_options.output_file_dir +"/" +file_name + "._cache_data.jolib"
+        file_name = self.data.global_options.input.file_name.split(".")[0]
+        cache_file = self.data.global_options.output.dir +"/" +file_name + "._cache_data.jolib"
         joblib.dump(data, cache_file)
 
         
     def load_cache(self):
         if self.data.global_options.cache:
-            file_name = self.data.global_options.input_file_name.split(".")[0]
-            cache_file = self.data.global_options.output_file_dir +"/" + file_name + "._cache_data.jolib"
+            file_name = self.data.global_options.input.file_name.split(".")[0]
+            cache_file = self.data.global_options.output.dir +"/" + file_name + "._cache_data.jolib"
             try:
                 self.cached_data = joblib.load(cache_file)
             except:
@@ -50,11 +50,11 @@ class BaseExecutor(object):
         self.km = InProcessKernelManager(kernel_name=global_options.kernal)
         log_level = global_options.log_level
         if log_level != 'notset':
-            log_file =  os.path.join(global_options.input_file_dir, "log.txt")
+            log_file =  os.path.join(global_options.input.dir, "log.txt")
             f = open(log_file, "w")
         else:
             f = open(os.devnull, 'w')
-        self.km.start_kernel(cwd=global_options.input_file_dir, stderr=f)
+        self.km.start_kernel(cwd=global_options.input.dir, stderr=f)
 
         self.kc = self.km.client()
         self.kc.start_channels()
@@ -97,7 +97,7 @@ class BaseExecutor(object):
         my_connection = os.getenv(con_string)
         
         var_name = chunk.options.name or "zen"
-        if self.data.global_options.output_format == "pdf":
+        if self.data.global_options.output.format == "pdf":
             result_in = "to_latex()"
         else:
             result_in = "to_html()"
