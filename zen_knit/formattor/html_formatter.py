@@ -37,7 +37,7 @@ class HTMLFormatter(BaseFormatter):
         return theme_css
         
     def _get_css(self):
-        css = self.organized_data.global_options.css
+        css = self.organized_data.global_options.output.html.css
         if 'http' in css:
             return self._make_css_request(css)
         
@@ -58,7 +58,7 @@ class HTMLFormatter(BaseFormatter):
         self.header = (htmltemplate["header"] %
                 {"pygments_css"  : HtmlFormatter().get_style_defs(),
                 "theme_css" : theme_css})
-        self.footer = htmltemplate["footer"].format(source=self.organized_data.global_options.input_file_name, version=__version__, date=self.organized_data.global_options.date)
+        self.footer = htmltemplate["footer"].format(source=self.organized_data.global_options.input.file_name, version=__version__, date=self.organized_data.global_options.date)
 
     def _parsetitle(self, global_option:GlobalOption):
         self._add_header_fotter()

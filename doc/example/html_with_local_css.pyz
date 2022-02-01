@@ -2,8 +2,10 @@
 title: Zen Markdown Demo
 author: Dr. P. B. Patel
 date: CURRENT_DATE
-css: my_css.css
-output: html
+output: 
+    format: html
+    html: 
+        css: my_css.css
 ---
 
 

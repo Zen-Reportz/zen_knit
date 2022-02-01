@@ -1,5 +1,5 @@
 import os
-from zen_knit.data_types import ReadData, GlobalOption
+from zen_knit.data_types import Input, Output, ReadData, GlobalOption
 
 
 class BaseReader:
@@ -9,9 +9,13 @@ class BaseReader:
         self.raw_data = ReadData(
             global_options=GlobalOption(
                 title = "test",
-                input_file_dir=input_file_path,
-                input_file_name=input_file_name,
-                output_file_dir = output_file_dir,
+                output = Output(
+                    dir = output_file_dir,
+                ),
+                input = Input(
+                    dir = input_file_path,
+                    file_name = input_file_name
+                )
             ),
             data=self._read(full_path)
         )

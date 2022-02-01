@@ -2,8 +2,10 @@
 title: Zen Markdown Demo
 author: Dr. P. B. Patel
 date: CURRENT_DATE
-css: skleton
-output: html
+output: 
+    format: html
+    html: 
+        css: skleton
 ---
 
 # with sql

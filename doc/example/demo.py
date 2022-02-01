@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from zen_knit.formattor import get_formatter
 from zen_knit.formattor.html_formatter import HTMLFormatter
-from zen_knit.data_types import ChunkOption, OrganizedData, GlobalOption, OrganizedChunk, OrganizedChuckType
+from zen_knit.data_types import ChunkOption, OrganizedData, GlobalOption, OrganizedChunk, OrganizedChuckType, Input, Output, latexOuput, htmlOutput
 from datetime import datetime
 
 t = OrganizedChuckType
@@ -11,11 +11,19 @@ t = OrganizedChuckType
 g = GlobalOption(
     title = "python example",
     author = "Dr P B Pael",
-    date = datetime.now().isoformat(),
-    fig_dir = "figures",
-    output_format = "html",
-    output_file_name = "html_python.html",
-    output_file_dir = "output"
+    date = 'CURRENT_DATE',
+    input= Input(
+        matplotlib = True,
+    ),
+    output = Output(
+        fig_dir = "figures",
+        format = "html",
+        file_name= "html_python.html",
+        dir = "output",
+        html = htmlOutput(
+        )
+    )
+    
 )
 
 contents = []
@@ -86,7 +94,7 @@ og = OrganizedData(
     global_options=g,
     chunks = contents
 )
-f = get_formatter(g.output_format)
+f = get_formatter(g.output.format)
  # or its derivative class
 bf = f(og)
 bf.run()

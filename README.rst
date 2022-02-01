@@ -101,7 +101,7 @@ HTML example with SQL
 
 
 Install
------------------------
+-------
 
 From PyPi::
 
@@ -112,6 +112,15 @@ or download the source and run::
   python setup.py install
 
 
+Other Dependency
+----------------
+install pandoc from : https://github.com/jgm/pandoc/releases
+
+install texlive for debian: sudo apt install texlive-full
+
+install texlive for window: https://www.tug.org/texlive/acquire-netinstall.html
+
+install texlive for mac: https://tug.org/texlive/quickinstall.html
 
 License information
 -------------------

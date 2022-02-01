@@ -1,9 +1,25 @@
-from io import RawIOBase
-from posixpath import split
 import re
-import datetime
-import ast
 from zen_knit.data_types import GlobalOption, ReadData, ChunkOption, Chunk, ParseData, BOOLENCHUNCKOPTIONS
+import oyaml
+import datetime
+
+def merge(a, b, path=None):
+    "merges b into a"
+    if path is None: path = []
+    for key in b:
+        if key in a:
+            if isinstance(a[key], dict) and isinstance(b[key], dict):
+                merge(a[key], b[key], path + [str(key)])
+            elif a[key] == b[key]:
+                pass # same leaf value
+            else:
+                print(f"over writing deafult value for {key}")
+                a[key] = b[key]
+
+        else:
+            a[key] = b[key]
+    return a
+
 
 def option_parser(raw: str) -> ChunkOption:
     options = raw.split("{")[1].split("}")[0].replace(" ", "").split(",")
@@ -30,43 +46,17 @@ class BaseParser:
         self._parse_data()
 
     def _parse_title(self, title_info):
-        title_present = False
-        for t in title_info.splitlines():
-            split_t = t.split(":")
-            
-            if len(split_t) == 2:
-                split_t[1] = split_t[1].lstrip()
-                if "title" == split_t[0]:
-                    self.raw_data.global_options.__setattr__("title", split_t[1])
-                    title_present = True
-                if "author" == split_t[0]:
-                    self.raw_data.global_options.__setattr__("author", split_t[1])
-                if "date" == split_t[0]:
-                    date1 = split_t[1]
-                    if  "CURRENT_DATE" in date1:
-                        date1 =  datetime.datetime.now().strftime("%d %B, %Y")
-                    elif "datetime" in date1:
-                        date1 = eval(date1)
-                    self.raw_data.global_options.__setattr__("date", date1)
-                if "output" == split_t[0]:
-                    self.raw_data.global_options.__setattr__("output_format", split_t[1])
-                if "latex_header" == split_t[0]:
-                    self.raw_data.global_options.__setattr__("latex_header", split_t[1])
-            else:
-                if split_t[0] in ('title', 'author', 'date', 'output'):
-                    raise Exception(f"Not right format for {split[1]}")
-                
-            if 'css' in split_t[0]:
-                css = ":".join(split_t[1:])
-                self.raw_data.global_options.__setattr__("css", css)
+        old_data = self.raw_data.global_options.dict()
+        new_data = oyaml.safe_load(title_info)
+        final_data = merge(old_data, new_data)
+        if  "CURRENT_DATE" in final_data["date"]:
+            date1 =  datetime.datetime.now().strftime("%d %B, %Y")
+        elif "datetime" in final_data["date"]:
+            date1 = eval(final_data["date"])
+        final_data["date"] = date1
 
-            if 'cache' in split_t[0]:
-                value = split_t[1]
-                value = (value == "true") or (value == "True") or (value == "t") or (value == "T")
-                self.raw_data.global_options.__setattr__("cache", value)
+        self.raw_data.global_options = GlobalOption(**final_data)
 
-        if (not title_present) and (self.raw_data.global_options.title == "test"):
-            raise Exception("Title is not provided")
 
     def _parse_data(self):
         started = False

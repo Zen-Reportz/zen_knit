@@ -22,7 +22,7 @@ def knit(file, output_file_dir):
     bp = BaseParser(br.raw_data)
     be = BaseExecutor(bp.parsed_data)
     bo = BaseOrganizer(be.excuted_data)
-    f = get_formatter(bo.organized_data.global_options.output_format)
+    f = get_formatter(bo.organized_data.global_options.output.format)
     bf:BaseFormatter # or its derivative class
     bf = f(bo.organized_data)
     bf.run()

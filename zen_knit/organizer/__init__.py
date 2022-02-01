@@ -33,21 +33,21 @@ class BaseOrganizer:
 
     def _create_output_file_name(self):
         global_options = self.organized_data.global_options
-        global_options.output_file_name = global_options.input_file_name.split(".")[0] + "."+ global_options.output_format
+        global_options.output.file_name = global_options.input.file_name.split(".")[0] + "."+ global_options.output.format
 
       
     def _create_output_folder_name(self):
         global_options = self.organized_data.global_options
         
-        if global_options.output_file_dir is None:
-            global_options.output_file_dir = global_options.input_file_dir
+        if global_options.output.dir is None:
+            global_options.output.dir = global_options.input.dir
         
 
     def _create_fig_folder(self):
-        output_folder = self.organized_data.global_options.output_file_dir
+        output_folder = self.organized_data.global_options.output.dir
         Path(output_folder).mkdir(parents=True, exist_ok=True)
 
-        fig_folder = os.path.join(output_folder, self.organized_data.global_options.fig_dir)
+        fig_folder = os.path.join(output_folder, self.organized_data.global_options.output.fig_dir)
         self.fig_folder = fig_folder
         Path(fig_folder).mkdir(parents=True, exist_ok=True)
     
@@ -163,7 +163,8 @@ class BaseOrganizer:
 
         if data["output_type"] == "display_data":
             if "text/html" in data["data"]:    
-                if self.executed_data.global_options.output_format != "html":
+                print(self.executed_data.global_options.output.format)
+                if self.executed_data.global_options.output.format != "html":
                     raise Exception("output format is not HTML")
                 else:        
                     t = {"type": "html_data", "str_data":data["data"]["text/html"].encode().decode() }

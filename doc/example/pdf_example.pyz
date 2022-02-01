@@ -2,8 +2,10 @@
 title: Zen Markdown Demo
 author: Dr. P. B. Patel
 date: CURRENT_DATE
-output: pdf
-latex_header: \usepackage{booktabs}
+output: 
+    format: pdf
+    latex: 
+        header: \usepackage{booktabs}
 ---
 
 ## with class 
