@@ -101,15 +101,14 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## How to Use it
 
-  <code> pip install zen-knit
+  <code> pip install zen-knit  </code>
 
-  knit -f doc/example/html_example.pyz  -ofd doc/example/output/
+  <code> knit -f doc/example/html_example.pyz  -ofd doc/example/output/  </code>
   
-  knit -f doc/example/pdf_example.pyz  -ofd doc/example/output/
+  <code> knit -f doc/example/pdf_example.pyz  -ofd doc/example/output/  </code>
 
-  python doc/example/demo.py 
+  <code>  python doc/example/demo.py  </code>
   
-  </code>
 
 ## Arguments 
     ---
@@ -160,3 +159,4 @@ Above code will map on GlobalOption class in in following
             if v.lower() not in ('notset', "debug", 'info', 'warning', 'error', 'critical'):
                 raise ValueError('must contain a space')
             return v.title()
+
