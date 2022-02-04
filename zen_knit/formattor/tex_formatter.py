@@ -7,8 +7,9 @@ from pygments import highlight
 from IPython.lib.lexers import IPyLexer
 from pygments.formatters import LatexFormatter
 
-from zen_knit.data_types import ChunkOption, GlobalOption, OrganizedChunk, OrganizedData
+from zen_knit.data_types import ChunkOption, GlobalOption, OrganizedChunk, OrganizedData, latexOuput
 from zen_knit.formattor.base_formatter import BaseFormatter
+from zen_knit.parser import merge
 
 class TexFormatter(BaseFormatter):
     def __init__(self, organized_data:OrganizedData):
@@ -28,6 +29,19 @@ class TexFormatter(BaseFormatter):
             pass
     
         my_library = " \n ".join(my_library)
+        
+        latex_output = latexOuput().dict()
+        provided_latex = self.organized_data.global_options.output.latex
+        if provided_latex is None:
+            provided_latex = latexOuput().dict()
+        else:
+            provided_latex = provided_latex.dict()
+
+        final_latex_data = merge(latex_output, provided_latex)
+
+        self.organized_data.global_options.output.latex = latexOuput(**final_latex_data)
+
+
         page_size = self.organized_data.global_options.output.latex.page_size
         input_file = self.organized_data.global_options.input.file_name
 
