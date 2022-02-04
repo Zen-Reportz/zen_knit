@@ -11,6 +11,7 @@ class Input(BaseModel):
 
 class latexOuput(BaseModel):
     header: Optional[str] 
+    page_size: Optional[str] = 'a4paper'
 class htmlOutput(BaseModel):
     css: str = "bootstrap"
 

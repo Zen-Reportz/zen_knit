@@ -110,3 +110,53 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   python doc/example/demo.py 
   
   </code>
+
+## Arguments 
+    ---
+    title: Zen Markdown Demo
+    author: Dr. P. B. Patel
+    date: CURRENT_DATE
+    cache: true
+    output: 
+        format: html
+        html: 
+            css: skleton
+    ---
+
+Above code will map on GlobalOption class in in following
+
+    class Input(BaseModel):
+        dir: Optional[str]
+        file_name: Optional[str]
+        matplot: bool = True
+    
+    class latexOuput(BaseModel):
+        header: Optional[str] 
+        page_size: Optional[str] = 'a4paper' #Newely added parameters
+    
+    class htmlOutput(BaseModel):
+        css: str = "bootstrap"
+
+    class Output(BaseModel):
+        fig_dir: str = "figures"
+        format: Optional[str]
+        file_name: Optional[str]
+        dir: Optional[str]
+        latex: Optional[latexOuput]
+        html: Optional[htmlOutput]
+
+    class GlobalOption(BaseModel):
+        title: str
+        author: Optional[str]
+        date: Optional[str]
+        kernal: str = "python3"
+        log_level: str = "debug"
+        cache: Optional[bool] = False
+        output: Output
+        input: Input
+
+        @validator('log_level')
+        def fix_option_for_log(cls, v:str):
+            if v.lower() not in ('notset', "debug", 'info', 'warning', 'error', 'critical'):
+                raise ValueError('must contain a space')
+            return v.title()
