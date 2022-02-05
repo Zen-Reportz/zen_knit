@@ -7,15 +7,16 @@ from pygments import highlight
 from IPython.lib.lexers import IPyLexer
 from pygments.formatters import LatexFormatter
 
-from zen_knit.data_types import ChunkOption, GlobalOption, OrganizedChunk, OrganizedData
+from zen_knit.data_types import ChunkOption, GlobalOption, OrganizedChunk, OrganizedData, latexOuput
 from zen_knit.formattor.base_formatter import BaseFormatter
+from zen_knit.parser import merge
 
 class TexFormatter(BaseFormatter):
     def __init__(self, organized_data:OrganizedData):
         super().__init__(organized_data)
         my_library = ["\\usepackage{fancyvrb, color, graphicx, amsmath, url, textcomp, iftex, booktabs}", 
                       "\\usepackage{palatino}"
-                      "\\usepackage[a4paper,text={16.5cm,25.2cm},centering]{geometry}",
+                      "\\usepackage[text={16.5cm,25.2cm},centering]{geometry}",
                       "\\ifxetex\\usepackage{fontspec}\\fi",
                       "\\usepackage{xcolor}",
                       "\\usepackage{hyperref}"]
@@ -28,9 +29,23 @@ class TexFormatter(BaseFormatter):
             pass
     
         my_library = " \n ".join(my_library)
+        
+        latex_output = latexOuput().dict()
+        provided_latex = self.organized_data.global_options.output.latex
+        if provided_latex is None:
+            provided_latex = latexOuput().dict()
+        else:
+            provided_latex = provided_latex.dict()
+
+        final_latex_data = merge(latex_output, provided_latex)
+
+        self.organized_data.global_options.output.latex = latexOuput(**final_latex_data)
 
 
-        self.header = ("""\\documentclass[a4paper,11pt,final]{article}
+        page_size = self.organized_data.global_options.output.latex.page_size
+        input_file = self.organized_data.global_options.input.file_name
+
+        self.header = ("""\\documentclass[%s ,11pt,final]{article}
             %s
             
             %% ANSI colors from nbconvert
@@ -67,7 +82,7 @@ class TexFormatter(BaseFormatter):
             \\providecommand{\\tightlist}{%%
                 \\setlength{\\itemsep}{0pt}\\setlength{\\parskip}{0pt}}
             %s
-            """) % (my_library, self.organized_data.global_options.input.file_name, LatexFormatter().get_style_defs())
+            """) % (page_size,  my_library, input_file, LatexFormatter().get_style_defs())
         
         self.formatted_doc = ''
         self.footer = "\\end{document}"

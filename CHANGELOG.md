@@ -1,5 +1,7 @@
 # Change Log
 
+## [0.2.1]
+- *page_size* in latexOuput class
 
 ## [0.2.0]
 - Input and Output Header Pyz (Zen Markdown / Python Markdown)
@@ -18,6 +20,5 @@ some options moved from GlobalOption
 - *cache* to Output class
 - *css* to move to htmlOutput
 - *latex_header* to move to htmlOutput, renamed as **header**
-
 
 
