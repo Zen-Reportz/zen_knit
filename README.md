@@ -131,8 +131,9 @@ Above code will map on GlobalOption class in in following
     
     class latexOuput(BaseModel):
         header: Optional[str] 
-        page_size: Optional[str] = 'a4paper' #Newely added parameters
-    
+        page_size: Optional[str] = 'a4paper'
+        geometry_parameter: Optional[str] = "text={16.5cm,25.2cm},centering"  #Newely added parameters
+
     class htmlOutput(BaseModel):
         css: str = "bootstrap"
 

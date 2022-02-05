@@ -14,9 +14,12 @@ from zen_knit.parser import merge
 class TexFormatter(BaseFormatter):
     def __init__(self, organized_data:OrganizedData):
         super().__init__(organized_data)
+
+        self._build_latex_output()
+        geometry_parameters = self.organized_data.global_options.output.latex.geometry_parameters
         my_library = ["\\usepackage{fancyvrb, color, graphicx, amsmath, url, textcomp, iftex, booktabs}", 
                       "\\usepackage{palatino}"
-                      "\\usepackage[text={16.5cm,25.2cm},centering]{geometry}",
+                      "\\usepackage[%s]{geometry}" %(geometry_parameters),
                       "\\ifxetex\\usepackage{fontspec}\\fi",
                       "\\usepackage{xcolor}",
                       "\\usepackage{hyperref}"]
@@ -29,17 +32,6 @@ class TexFormatter(BaseFormatter):
             pass
     
         my_library = " \n ".join(my_library)
-        
-        latex_output = latexOuput().dict()
-        provided_latex = self.organized_data.global_options.output.latex
-        if provided_latex is None:
-            provided_latex = latexOuput().dict()
-        else:
-            provided_latex = provided_latex.dict()
-
-        final_latex_data = merge(latex_output, provided_latex)
-
-        self.organized_data.global_options.output.latex = latexOuput(**final_latex_data)
 
 
         page_size = self.organized_data.global_options.output.latex.page_size
@@ -88,6 +80,17 @@ class TexFormatter(BaseFormatter):
         self.footer = "\\end{document}"
         self.subheader = "\n\\begin{document}\n"
 
+    def _build_latex_output(self):
+        latex_output = latexOuput().dict()
+        provided_latex = self.organized_data.global_options.output.latex
+        if provided_latex is None:
+            provided_latex = latexOuput().dict()
+        else:
+            provided_latex = provided_latex.dict()
+
+        final_latex_data = merge(latex_output, provided_latex)
+
+        self.organized_data.global_options.output.latex = latexOuput(**final_latex_data)
 
     def _parsetitle(self, global_option:GlobalOption):
         title = global_option.title
