@@ -12,6 +12,8 @@ class Input(BaseModel):
 class latexOuput(BaseModel):
     header: Optional[str] 
     page_size: Optional[str] = 'a4paper'
+    geometry_parameters: Optional[str] = "text={16.5cm,25.2cm},centering"
+    
 class htmlOutput(BaseModel):
     css: str = "bootstrap"
 
