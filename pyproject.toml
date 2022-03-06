@@ -31,7 +31,7 @@ requests = "^2.27.1"
 
 [tool.poetry.scripts]
 knit = "zen_knit.cli:knit"
-publish = "zen_knit.publish_cli:cli"
+zen = "zen_knit.publish_cli:cli"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
