@@ -1,0 +1,11 @@
+language: R
+r_packages:
+- package: r-dt
+  method: conda
+  channel: conda-forge
+- package: r-golem
+  method: conda
+  channel: conda-forge
+title: R golem Example
+version: 3.7
+type: golem

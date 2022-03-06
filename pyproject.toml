@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "zen_knit"
-version = "0.2.2"
-description = "Zen-Knit is a formal (PDF), informal (HTML) report generator for data analyst and data scientist who wants to use python. Rmarkdown Alternative for Python"
+version = "0.2.3"
+description = "Zen-Knit is a formal (PDF), informal (HTML) report generator for data analyst and data scientist who wants to use python. Rmarkdown Alternative for Python, It also allow you to publish reports to Zen Reportz Enterprise or community edition"
 authors = ["Zen <zenreportz@protonmail.com>"]
 license = "MIT"
 readme = "README.md"
@@ -25,11 +25,13 @@ ipykernel = ">=6.0.0"
 SQLAlchemy = "^1.4.29"
 joblib = "^1.1.0"
 oyaml = "^1.0"
+requests = "^2.27.1"
 
 
 
 [tool.poetry.scripts]
 knit = "zen_knit.cli:knit"
+publish = "zen_knit.publish_cli:cli"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

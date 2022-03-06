@@ -1,0 +1,5 @@
+language: python
+requirement: true
+title: streamlit example
+type: Streamlit
+version: 3.7

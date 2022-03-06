@@ -1,6 +1,6 @@
 # About Zen-Knit:
 Zen-Knit is a formal (PDF), informal (HTML) report generator for data analyst and data scientist who wants to use python. RMarkdown alternative.
-Zen-Knit is good for creating reports, tutorials with embedded python. RMarkdown alternative. Python Markdown Support.
+Zen-Knit is good for creating reports, tutorials with embedded python. RMarkdown alternative. Python Markdown Support. It also allows you to publish reports to analytics-reports.zenreportz.com (comming soon) or private zenreportz servers 
 
 
 [![Download Count](https://static.pepy.tech/personalized-badge/zen-knit?period=total&units=international_system&left_color=grey&right_color=green&left_text=Downloads)](https://pepy.tech/project/zen-knit)
@@ -161,3 +161,16 @@ Above code will map on GlobalOption class in in following
                 raise ValueError('must contain a space')
             return v.title()
 
+
+# Zen Publish:
+Ability to publish programmable, formal, informal reports to Private or Public instance of zen reportz.
+Learn more at [Here](https://zenreportz.com?utm=github)
+
+Learn more about how to publish to private or public instance of Zen Reportz [Here](https://zenreportz.com/how-to-publish-to-zen-reportz?utm=github)
+
+# analytics-reports.zenreportz.com features
+* Static Reports like HTML, PDF
+* Any one access reports 
+* Free to use 
+* Unlimite Publish
+* Republish report same place again

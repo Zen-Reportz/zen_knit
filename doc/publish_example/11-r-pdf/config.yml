@@ -1,0 +1,8 @@
+language: R
+r_packages:
+- package: r-rmarkdown
+  method: conda
+  channel: conda-forge
+title: r-pdf-example
+type: Markdown
+version: 3.5

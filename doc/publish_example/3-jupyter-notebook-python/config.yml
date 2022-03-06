@@ -1,0 +1,10 @@
+format: html
+language: python
+python_conda_packages:
+  jupyter: latest
+  matplotlib: latest
+  seaborn: latest
+title: jupyter notebook example
+type: Jupyter
+version: 3.6
+recreate: true

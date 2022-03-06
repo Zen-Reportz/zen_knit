@@ -1,0 +1,23 @@
+Package: golemexample
+Title: Golem Example
+Version: 0.0.0.9000
+Authors@R: person('Colin', 'Fay', email = 'contact@colinfay.me', role = c('cre', 'aut'))
+Description: A Package to show the basics of a golem.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    shiny,
+    golem,
+    processx,
+    attempt,
+    DT,
+    glue,
+    htmltools
+Remotes: 
+    Thinkr-open/golem
+RoxygenNote: 7.1.1
+URL: https://github.com/colinfay/golemexample
+BugReports: https://github.com/colinfay/golemexample/issues
+Suggests: 
+    testthat

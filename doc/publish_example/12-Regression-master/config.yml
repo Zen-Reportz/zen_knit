@@ -1,0 +1,29 @@
+language: R
+r_packages:
+- package: r-nortest
+  method: conda
+  channel: conda-forge
+- package: r-tseries
+  method: conda
+  channel: conda-forge
+- package: r-RcmdrMisc
+  method: conda
+  channel: conda-forge
+- package: r-lmtest
+  method: conda
+  channel: conda-forge
+- package: r-shiny
+  method: conda
+  channel: conda-forge
+- package: r-shinythemes
+  method: conda
+  channel: conda-forge
+- package: tidyverse/ggplot2
+  method: github
+- package: tseries
+  method: cran
+- package: DT
+  code: install.packages("DT", dependencies = TRUE, repos = "http://cran.us.r-project.org")
+title: R shiny Example
+type: shiny
+version: 3.6

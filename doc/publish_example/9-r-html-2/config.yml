@@ -1,0 +1,17 @@
+language: R
+r_cran_packages:
+  MASS: latest
+  dplyr: latest
+  ggplot2: latest
+  gtable: latest
+  isoband: latest
+  knitr: latest
+  lubridate: latest
+  mgcv: latest
+  prettydoc: latest
+  scales: latest
+  rmarkdown: latest
+title: r html example 2
+type: markdown
+version: 3.4
+recreate: true
