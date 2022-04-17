@@ -1,3 +1,5 @@
 language: pdf
 title: publish pdf example
 type: pdf
+all_ids:
+  local: '2'

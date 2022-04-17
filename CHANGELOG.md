@@ -1,5 +1,8 @@
 # Change Log
 
+## [0.2.5]
+- *py* file support
+- moved cache into ouput object
 ## [0.2.1]
 - *page_size* in latexOuput class
 
@@ -20,5 +23,6 @@ some options moved from GlobalOption
 - *cache* to Output class
 - *css* to move to htmlOutput
 - *latex_header* to move to htmlOutput, renamed as **header**
+- moved cache into ouput object
 
 

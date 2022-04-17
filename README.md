@@ -14,12 +14,13 @@ Download VS Plugin from [MarketPlace](https://marketplace.visualstudio.com/items
 
 
 # Features:
+* .py and .pyz file support
 * Python 3.7+ compatibility
 * Support for IPython magics and rich output.
 * **Execute python code** in the chunks and **capture** input and output to a report.
 * **Use hidden code chunks,** i.e. code is executed, but not printed in the output file.
 * Capture matplotlib graphics.
-* Evaluate inline code in documentation chunks marked using ```{ }``` 
+* Evaluate inline code in documentation chunks marked using ```{ }```
 * Publish reports from Python scripts. Similar to R markdown.
 * Interactive Plots using plotly
 * integrate it in your process. It will fit your need rather than you need to adjust for tool.
@@ -115,8 +116,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     title: Zen Markdown Demo
     author: Dr. P. B. Patel
     date: CURRENT_DATE
-    cache: true
     output: 
+        cache: true
         format: html
         html: 
             css: skleton

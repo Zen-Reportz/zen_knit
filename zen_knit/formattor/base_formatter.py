@@ -28,6 +28,9 @@ class BaseFormatter:
     
     def _format_codechunks(self, content:OrganizedChunk):
         pass
+
+    def _format_sqlchunks(self, content: OrganizedChunk):
+        pass
     
     def _format_image(self, content:OrganizedChunk):
         pass
@@ -41,12 +44,14 @@ class BaseFormatter:
     def _format_doc(self):
         chunk: OrganizedChunk
         for _, chunk in enumerate(self.organized_data.chunks):
-            
             if chunk.type == "markdown":
                 t = self._format_docchunk(chunk)
                 self.formatted_doc = self.formatted_doc + "\n" + t
             elif chunk.type == "code":
                 t = self._format_codechunks(chunk)
+                self.formatted_doc = self.formatted_doc + "\n" + t
+            elif chunk.type == "sql":
+                t = self._format_sqlchunks(chunk)
                 self.formatted_doc = self.formatted_doc + "\n" + t
             elif chunk.type == "se_data":
                 t = self._format_codechunks(chunk)

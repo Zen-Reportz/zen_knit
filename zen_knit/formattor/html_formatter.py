@@ -83,6 +83,13 @@ class HTMLFormatter(BaseFormatter):
         t = highlight(t, IPyLexer(), HtmlFormatter())
 
         return t
+    
+    def _format_sqlchunks(self, content: OrganizedChunk):
+        t = f"""
+        <div class="highlight"><pre><span></span><span class="sd">{content.str_data} </span>
+        </pre></div>
+        """
+        return t
 
     def _format_html(self, content: OrganizedChunk):
         if '<table' in content.str_data:

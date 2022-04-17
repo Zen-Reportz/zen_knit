@@ -7,6 +7,7 @@ from typing import List, Optional, Tuple, Any
 class Input(BaseModel):
     dir: Optional[str]
     file_name: Optional[str]
+    extension: Optional[str] = "pyz"
     matplot: bool = True
 
 class latexOuput(BaseModel):
@@ -24,6 +25,7 @@ class Output(BaseModel):
     dir: Optional[str]
     latex: Optional[latexOuput]
     html: Optional[htmlOutput]
+    cache: Optional[bool] = False
 
 
 class GlobalOption(BaseModel):
@@ -32,7 +34,6 @@ class GlobalOption(BaseModel):
     date: Optional[str]
     kernal: str = "python3"
     log_level: str = "debug"
-    cache: Optional[bool] = False
     output: Output
     input: Input
 

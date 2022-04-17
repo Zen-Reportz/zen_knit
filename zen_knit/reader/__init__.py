@@ -1,3 +1,4 @@
+from distutils import extension
 import os
 from zen_knit.data_types import Input, Output, ReadData, GlobalOption
 
@@ -14,7 +15,8 @@ class BaseReader:
                 ),
                 input = Input(
                     dir = input_file_path,
-                    file_name = input_file_name
+                    file_name = input_file_name,
+                    extension= input_file_name.split(".")[-1]
                 )
             ),
             data=self._read(full_path)

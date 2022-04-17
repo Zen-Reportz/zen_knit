@@ -37,7 +37,7 @@ class BaseExecutor(object):
 
         
     def load_cache(self):
-        if self.data.global_options.cache:
+        if self.data.global_options.output.cache:
             file_name = self.data.global_options.input.file_name.split(".")[0]
             cache_file = self.data.global_options.output.dir +"/" + file_name + "._cache_data.jolib"
             try:
@@ -79,7 +79,8 @@ class BaseExecutor(object):
             else:
                 print(f"executing index {index}")
             self._run_chunck(chunk, index)
-        self._save_chunks()
+        if self.data.global_options.output.cache:
+            self._save_chunks()
 
     def _run_and_save(self, code:str,  ec:ExecuatedChunk, type_:str):
         ran_code = self._run_code(code)
@@ -93,6 +94,12 @@ class BaseExecutor(object):
 
     def _run_sql(self, chunk:Chunk, ec:ExecuatedChunk):
         query = chunk.string_.replace("\n", " ")
+        # if self.data.global_options.input.extension == "py":
+        #     query = query.replace('"', '')
+            # query = str(query, "utf-8")
+        if query[:3] == '"""':
+            query =query[3:-3]
+        
         con_string =  chunk.options.con_string
         my_connection = os.getenv(con_string)
         
@@ -118,7 +125,7 @@ class BaseExecutor(object):
         self._run_and_save(code, ec, chunk.type)
     
     def _run_chunck(self, chunk:Chunk, index):
-        if (self.data.global_options.cache) and (self.cached_data):
+        if (self.data.global_options.output.cache) and (self.cached_data):
             if chunk.type == "code":
                 if chunk.options.name:
                     print(f"cache {chunk.options.name}")
@@ -132,9 +139,14 @@ class BaseExecutor(object):
         ec = ExecuatedChunk(chunk=chunk, results=[])
 
         if chunk.options.echo:
+            raw = chunk.string_
+            if chunk.type == "sql":
+                if raw[:3] == '"""':
+                    raw = raw[3:-3]
+            
             eco = ExecuatedChucnkOut(
                 output_type=chunk.type,
-                data= {'code_text_raw': chunk.string_}
+                data= {'code_text_raw': raw}
             )
             ec.results.append(eco)
 

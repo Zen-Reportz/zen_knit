@@ -126,6 +126,14 @@ class TexFormatter(BaseFormatter):
         transfomed = highlight(transfomed, IPyLexer(), LatexFormatter(verboptions="frame=single,fontsize=\small, xleftmargin=0.5em"))
         transfomed = filters.ansi2latex(transfomed)
         return transfomed
+    
+
+    def _format_sqlchunks(self, content:OrganizedChunk):
+        transfomed = content.str_data
+        transfomed = highlight(transfomed, IPyLexer(), LatexFormatter(verboptions="frame=single,fontsize=\small, xleftmargin=0.5em"))
+        transfomed = filters.ansi2latex(transfomed)
+        return transfomed
+
 
     def _format_image(self, content:OrganizedChunk):
 

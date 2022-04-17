@@ -3,6 +3,7 @@ import os
 import oyaml as yaml
 
 from click import UsageError
+import pathlib
 
 def cred_path()-> str:
     base_path = os.path.expanduser("~")
@@ -45,16 +46,12 @@ def pull_cred(profile):
 
 
 def create(key, secret, url, profile):
-    cred_folder()    
+    folder_path  = cred_folder()    
     setting_path = cred_path()
 
-    try:
-        with open(setting_path, "r") as f:
-            my_dict = yaml.safe_load(f)
-    except Exception as e:
-        print(e)
-        os.remove(setting_path)
-
+    p = pathlib.Path(folder_path)
+    p.mkdir(parents=True, exist_ok=True)
+    
     if not os.path.exists(setting_path):
         my_dict = {
             profile: {
@@ -64,6 +61,7 @@ def create(key, secret, url, profile):
             }
         }
     else:
+      
         with open(setting_path, "r") as f:
             my_dict = yaml.safe_load(f)
 

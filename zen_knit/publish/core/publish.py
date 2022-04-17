@@ -66,7 +66,7 @@ def publish(path, fresh, browser, profile):
         config['all_ids'] = {
             profile: report_id
         }
-        with open("config.yml".format, "w") as f:
+        with open("config.yml", "w") as f:
             yaml.dump(config, f)
 
         if len(response["workers"])> 0 :

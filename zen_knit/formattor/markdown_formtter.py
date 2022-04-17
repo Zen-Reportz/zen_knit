@@ -30,6 +30,13 @@ class MarkDownFormatter(BaseFormatter):
         else:
             return f"``` \n {t} \n ```"
 
+    def _format_sqlchunks(self, content:OrganizedChunk):
+        t = content.str_data
+        if content.type == "code":
+            return f"```sql \n {t} \n ```"
+        else:
+            return f"``` \n {t} \n ```"
+
     def _format_image(self, content:OrganizedChunk):
         result = ""
         figstring = ""

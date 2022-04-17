@@ -55,8 +55,10 @@ class BaseOrganizer:
     def _parse_raw(self, data, output_type):
         if data.get("code_text_raw") is not None:
             if self._clean_up(data['code_text_raw']) is not None:
-                if output_type in ("code", "sql"):
+                if output_type in ("code"):
                     t = {"type": "code", "str_data": data['code_text_raw'] }
+                elif output_type in ("sql"):
+                    t = {"type": "sql", "str_data": data['code_text_raw'] }
                 else:
                     t = {"type": "markdown", "str_data": data['code_text_raw'] }
                 
