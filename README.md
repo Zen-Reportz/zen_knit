@@ -34,25 +34,53 @@ All example are available [HERE](https://github.com/Zen-Reportz/zen_knit/tree/ma
 
 
 ## PDF example
-![PDF Code](./doc/example/screenshots/pdf_code.png)
-![PDF Output](./doc/example/screenshots/pdf_output.png)
+### py example
+![Py PDF Code](./doc/example/screenshots/pdf_code_py.png)
+### pyz example
+![Pyz PDF Code](./doc/example/screenshots/pdf_code_pyz.png)
+### Output
+![PDF Output](./doc/example/screenshots/pdf_code_output.png)
 
 ## PDF example with SQL
-![PDF SQL Code](./doc/example/screenshots/pdf_sql_code.png) 
-![PDF SQL Output](./doc/example/screenshots/pdf_sql_output.png) 
+### py example
+![Py PDF SQL Code](./doc/example/screenshots/pdf_sql_code_py.png) 
+### pyz example
+![Pyz PDF SQL Code](./doc/example/screenshots/pdf_sql_code_pyz.png) 
+### Output
+![PDF SQL Output](./doc/example/screenshots/pdf_sql_code_output.png) 
 
 ## HTML example
-![HTML Code](./doc/example/screenshots/html_code.png) 
-![HTML Ouput ](./doc/example/screenshots/html_output.png)
-![HTML output 2](./doc/example/screenshots/html_output_2.png)
+### py example
+![Py HTML Code](./doc/example/screenshots/html_code_py.png) 
+### pyz example
+![Pyz HTML Code](./doc/example/screenshots/html_code_pyz.png) 
+### Output
+![HTML Ouput ](./doc/example/screenshots/html_code_output.png)
+![HTML output 2](./doc/example/screenshots/html_code_output_2.png)
 
 ## HTML example with custom CSS
-![HTML CDN CSS](./doc/example/screenshots/html_cdn_css_code.png) 
-![HTML Custom CSS](./doc/example/screenshots/html_custom_css_code.png)
+### py example
+#### https example
+![HTML CDN CSS](./doc/example/screenshots/html_cdn_css_code_py.png) 
+#### local css example
+![HTML Custom CSS](./doc/example/screenshots/html_custom_css_code_py.png)
+### pyz example
+#### https example
+
+![HTML CDN CSS](./doc/example/screenshots/html_cdn_css_code_pyz.png) 
+#### local css example
+![HTML Custom CSS](./doc/example/screenshots/html_custom_css_code_pyz.png)
 
 ## HTML example with SQL
-![HTML SQL](./doc/example/screenshots/html_sql_code.png) 
-![HTML SQL output](./doc/example/screenshots/html_sql_output.png) 
+### py example
+![HTML SQL](./doc/example/screenshots/html_sql_code_py.png) 
+
+### pyz example
+![HTML SQL](./doc/example/screenshots/html_sql_code_pyz.png) 
+
+### Output
+![HTML SQL output](./doc/example/screenshots/html_sql_code_output.png) 
+
 
 
 # Install
