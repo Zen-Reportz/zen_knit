@@ -4,6 +4,8 @@ All notable changes to the "vscode-zen-knit" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [0.0.5]
+- fix output folder issue
 
-- Initial release
+## [0.0.6]
+- show path location when build

@@ -11,7 +11,7 @@ export function knit(myChannel: vscode.OutputChannel){
         if (vscode.window.activeTextEditor) {
             const currentDocument = vscode.window.activeTextEditor.document;
             const knit = await getCommand('knit');
-            var output = getOutput('f');
+            var output = getOutput('output');
             let { dir: parentDir } = path.parse(currentDocument.uri.path);
             if (output === undefined){
                 output = parentDir.toString()
@@ -28,7 +28,7 @@ export function knit(myChannel: vscode.OutputChannel){
                     vscode.window.showErrorMessage("zen-knit : an error ocurred while building file");
                     return;
                 }
-                vscode.window.showInformationMessage("zen-knit : outputfile is build");
+                vscode.window.showInformationMessage("zen-knit : outputfile is build at " +  output);
             });
         }
     })
